@@ -1,7 +1,6 @@
 import { MortgageSummary, MortgageInputs } from '@/lib/mortgage'
-import { formatCurrency, formatCurrencyFull, formatPercent } from '@/lib/utils'
+import { formatCurrency } from '@/lib/utils'
 import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { TrendingDown, DollarSign, Calendar, Percent } from 'lucide-react'
 
 interface Props {

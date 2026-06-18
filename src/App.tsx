@@ -7,7 +7,6 @@ import { AmortizationChart } from '@/components/AmortizationChart'
 import { AmortizationTable } from '@/components/AmortizationTable'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
-import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { Home } from 'lucide-react'
 

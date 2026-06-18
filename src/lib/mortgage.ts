@@ -65,8 +65,6 @@ export function buildAmortizationTable(inputs: MortgageInputs): AmortizationRow[
   let currentRate = inputs.interestRate
   let payment = calcPayment(balance, currentRate, totalMonths)
 
-  // Track ARM state
-  let lastAdjustmentMonth = fixedPeriodMonths
   const initialRate = inputs.interestRate
 
   for (let m = 1; m <= totalMonths; m++) {
@@ -94,7 +92,6 @@ export function buildAmortizationTable(inputs: MortgageInputs): AmortizationRow[
       newRate = Math.max(newRate, initialRate - inputs.lifetimeCap) // floor
 
       currentRate = newRate
-      lastAdjustmentMonth = m
       payment = calcPayment(balance, currentRate, totalMonths - m + 1)
     }
 
@@ -130,10 +127,8 @@ export function calcSummary(inputs: MortgageInputs, rows: AmortizationRow[]): Mo
   const pointsCost = (inputs.pointsPaid / 100) * inputs.loanAmount
   const totalCost = totalPayments + pointsCost + inputs.originationFee
 
-  // Rough APR: amortize total cost back over loan term
+  const effectiveRate = inputs.interestRate
   const totalMonths = inputs.termYears * 12
-  const effectiveMonthlyPayment = (totalPayments + pointsCost + inputs.originationFee) / totalMonths
-  const effectiveRate = inputs.interestRate // simplified; full APR calc is iterative
 
   // Break-even on points: monthly savings vs no-points rate
   // A point typically buys ~0.25% rate reduction
